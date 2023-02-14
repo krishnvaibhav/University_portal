@@ -1,0 +1,65 @@
+{% extends "header.html" %}
+
+    {% block head %}
+    {{super()}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    {% endblock %}
+    {% block title %} Admin {% endblock %}
+    {% block header %}{{super()}}{% endblock %}
+    {% block content%}
+    <section class="views">
+        <div class="member-view">
+            <h1>Students</h1>
+            <div class="searchbar">
+                <form action="#" method="post">
+                    {{ formst.csrf_token }}
+                    {{formst.Username_st  (class_ = "search")}}
+                    {{formst.submit (class_ = 'icon')}}
+                </form>
+            </div>
+            <div class="scroll-member">
+            {%for i in students%}
+            <div class="member-view-details">
+                <img src="../static/images/blank-profile-picture-973460__340.webp" alt="">
+                <div class="member-view-text">
+                    <a href="{{url_for('member_details',user = i.Username , member = 'Student')}}"><h3>{{i.Name}}</h3></a>
+                    <h4>{{i.Class}}</h4>
+                    <p>{{i.Username}}</p>
+                </div>
+            </div>
+            <hr class="hr">
+            {% endfor %}
+            </div>
+        </div>
+        <div class="member-view">
+            <h1>Teachers</h1>
+            <div class="searchbar">
+                <form action="" method="post">
+                    {{ formth.csrf_token }}
+                    {{formth.Username_th  (class_ = "search")}}
+                    {{formth.submit (class_ = 'icon')}}
+                </form>
+            </div>
+            <div class="scroll-member">
+                {%for i in teachers%}
+            <div class="member-view-details">
+                <img src="../static/images/blank-profile-picture-973460__340.webp" alt="">
+                <div class="member-view-text">
+                    <a href="{{url_for('member_details',user = i.Username , member = 'Teacher')}}"><h3>{{i.Name}}</h3></a>
+                    <h4>{{i.Class}}</h4>
+                    <p>{{i.Username}}</p>
+                </div>
+            </div>
+            <hr class="hr">
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="admin-btns">
+        <a href="{{url_for('create_member', member = 'student')}}" class="btn-2">Create Student</a>
+        <a href="{{url_for('create_member', member = 'teacher')}}" class="btn-2">Create Teacher</a>
+    </section>
+    {% endblock %}
+   

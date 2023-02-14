@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Notes</title>
+</head>
+<body class="notes-body">
+  <div class="notes-form">
+    <form action="" method="post" enctype="multipart/form-data">
+      {{ form.csrf_token }}
+      <h3>Upload Materials</h3>
+      <div>{{form.description (class_ = "input")}}</div>
+      <div>{{form.file}}</div>
+      <div class="select-class-notes">
+          <label for="classes">Choose a class : </label>
+          <select name="classes" id="classes">
+            {%if user.Class != "" %}
+            <option value="{{user.Class}}" class="input">{{user.Class}}</option>
+            {%endif%}
+            {%if user.Class1 != "" %}
+            <option value="{{user.Class1}}" class="input">{{user.Class1}}</option>
+            {%endif%}
+            {%if user.Class2 != "" %}
+            <option value="{{user.Class2}}" class="input">{{user.Class2}}</option>
+            {%endif%}
+            {%if user.Class3 != "" %}
+            <option value="{{user.Class3}}" class="input">{{user.Class3}}</option>
+            {%endif%}
+          </select>
+        </div>
+      <div>{{form.submit (class_ = "announce-btn")}}</div>
+  </form>
+  <div class="btns">
+    <a href="{{url_for('teacher_login')}}" class="btn med-btn ">Go back</a>
+  </div>
+  </div>
+</body>
+</html>
+

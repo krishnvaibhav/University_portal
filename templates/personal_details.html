@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create member</title>
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body class="login-body">
+			<div class="register">
+				<form method="post">
+					<h3 class="label">Personal Details</h3>
+					{{ form.csrf_token }}
+					{%if member == 'student'%}
+                    {{form.Marks_10 (class_ = "input")}}
+                    {{form.Marks_12 (class_ = "input")}}
+					{{form.Father_Name (class_ = "input")}}
+					{{form.Mother_Name (class_ = 'input')}}
+					{{form.Local_Guardian (class_ = "input")}}
+					{% endif %}
+					{%if member == 'teacher'%}
+					{{form.Qualification (class_ = 'input')}}
+					{%endif%}
+					{{form.City (class_ = "input")}}
+                    {{form.State (class_ = "input")}}
+					{{form.Country (class_ = "input")}}
+					{{form.submit (class_ = 'btn')}}
+				</form>
+			</div>
+</body>
+<script src="../static/script.js"></script>
+</html>
+

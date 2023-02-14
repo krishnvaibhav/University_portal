@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create member</title>
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body class="login-body">
+			<div class="register">
+				<form method="post">
+					<h3 class="label">Create {{member.capitalize()}} </h3>
+					{{ form.csrf_token }}
+                    {{form.Name (class_ = "input")}}
+                    {{form.Username (class_ = "input")}}
+					{{form.Password (class_ = "input")}}
+                    {{form.Email (class_ = "input")}}
+                    {{form.Mobile (class_ = "input")}}
+					{{form.SEM (class_ = "input")}}
+					{% if member == 'teacher' %}
+					{{form.Salary (class_ = 'input')}}
+					{% endif %}
+					<h4 class="label">Select Course</h4>
+					{{form.Course (class_ = "input")}}
+					{{form.submit (class_ = "btn")}}
+				</form>
+			</div>
+</body>
+<script src="../static/script.js"></script>
+</html>
+

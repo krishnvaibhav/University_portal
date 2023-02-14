@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create member</title>
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body class="login-body">
+			<div class="register">
+				<form method="post">
+					{{ form.csrf_token }}
+					{%if add_class%}
+					<h3 class="label">Add Class</h3>
+					{{form.SEM (class_ = "input" )}}
+					{{form.Course (class_ = "input")}}
+					{%else%}
+					<h3 class="label">Update {{member.capitalize()}} </h3>
+                    {{form.Email (class_ = "input" ,value = email_value)}}
+                    {{form.Mobile (class_ = "input" , value = mobile_value)}}
+					{{form.SEM (class_ = "input" , value = sem_value)}}
+					{% if member == 'Teacher' %}
+					{{form.Salary (class_ = 'input', value = salary_value)}}
+					{% endif %}
+					{%endif%}
+					{{form.submit (class_ = "btn")}}
+					{%if add_class%}
+					<p class="flashing-error hidden">{{error}}</p>
+					{%endif%}
+				</form>
+				{%if add_class%}
+				<div class="btns">
+					<a href="{{url_for('admin_login')}}" class="btn med-btn ">Go back</a>
+				</div>
+				{%endif%}
+
+			</div>
+</body>
+<script src="../static/script.js"></script>
+</html>
+
