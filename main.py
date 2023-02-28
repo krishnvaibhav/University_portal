@@ -292,7 +292,6 @@ def upload_notes():
         msg.attach(data.filename, data.mimetype, data.read())
         mail.send(msg)
         return redirect(url_for('teacher_login'))
-
     return render_template('notes.html',form=form,user=user)
 
 @app.route('/download')
@@ -387,7 +386,7 @@ def search_engine():
             engine = ""
         else:
             profane = False
-            engine = Search_Engine.SearchEngine(query.capitalize())
+            engine = Search_Engine.SearchEngine(query.title())
 
     return render_template('search_engine.html', search=search_form, query=query, engine=engine, profane=profane,
                            member=session['user'])

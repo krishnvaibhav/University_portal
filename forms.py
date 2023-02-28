@@ -15,7 +15,7 @@ class LoginForm(FlaskForm):
 class CreateMember(FlaskForm):
     Name = StringField(validators=[InputRequired(), Length(min=0, max=50)],render_kw={"placeholder": "Name"})
     SEM = StringField(validators=[InputRequired(), Length(min=0, max=2)],render_kw={"placeholder": "semester"})
-    Course = SelectField(choices=[('Bcom(H)','Bcom(H)'),('BCA','BCA'),('BA.EPS','BA.EPS'),("BBA","BBA"),("BBA(H)","BBA(H)"),
+    Course = SelectField('Select an option',choices=[('Bcom(H)','Bcom(H)'),('BCA','BCA'),('BA.EPS','BA.EPS'),("BBA","BBA"),("BBA(H)","BBA(H)"),
                                   ("Bsc.CMS","Bsc.CMS"),("MBA","MBA"),("MCA","MCA"),('BPSYH','BPSYH')])
     Username = StringField(validators=[InputRequired(), Length(min=8, max=8)],render_kw={"placeholder": "RollNo/Username"})
     Email = EmailField(validators=[InputRequired(), Length(min=0, max=50)],render_kw={"placeholder": "Email"})

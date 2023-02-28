@@ -220,6 +220,10 @@ nav h3{
 	color: #2f2f2f;
 }
 
+.member-view-text h3{
+	color: #2f2f2f;
+}
+
 .member-view-text a:hover{
 	color: rgb(88, 88, 88);
 }
@@ -305,8 +309,8 @@ nav h3{
 	width: 400px;
 	border: none;
 	border-radius: 15px;
-
 }
+
 
 .register form .btn,.notes-form form .btn{
 	border: none;
@@ -563,6 +567,10 @@ nav h3{
 
 .select-class{
 	display: flex;
+}
+
+.select-class label{
+	color: var(--secondary);
 }
 
 .annouce-content .content p{
