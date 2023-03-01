@@ -17,7 +17,7 @@ import sys
 from profanity_check import predict
 import smtplib
 
-sender_email = "anonymousrobot974@gmail.com"
+sender_email = "{mail}"
 
 with open('config.json', 'r') as c:
     params = json.load(c)['params']
@@ -30,8 +30,8 @@ app.config['SECRET_KEY'] = "My key"
 # configuration of mail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'anonymousrobot974@gmail.com'
-app.config['MAIL_PASSWORD'] = 'iebtzxtcfwmtdnds'
+app.config['MAIL_USERNAME'] = '{mail}'
+app.config['MAIL_PASSWORD'] = '{password}'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
