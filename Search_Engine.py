@@ -59,3 +59,15 @@ class SearchEngine:
         if self.get_data == None:
             self.wiki_links_list = []
         return self.wiki_links_list
+    
+    def news_search(self):
+        news_list = []
+        from newsapi import NewsApiClient
+        newsapi = NewsApiClient(api_key='1b651c1053a440f1a74029cd50b681e8')
+        all_articles = newsapi.get_everything(q=self.word,page=2)
+        for i in all_articles['articles'][:10]:
+            print(i['title'])
+            print(i['url'])
+            news_list.append({"title":i['title']
+                              ,"url":i["url"]})
+        return news_list

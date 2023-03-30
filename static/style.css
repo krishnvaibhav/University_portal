@@ -34,7 +34,7 @@ li{
 
 .main{
 	width: 500px;
-	height: 500px;
+	/* height: 500px; */
 	background: red;
 	overflow: hidden;
 	background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
@@ -502,9 +502,11 @@ nav h3{
 	width: 100%;
 	display: flex;
 	flex-direction: row;
+	flex-direction: column;
 	align-items: flex-start;
 	justify-content: space-between;
 }
+
 
 .link-results *{
 	padding: 15px;
@@ -670,4 +672,14 @@ nav h3{
 .notes-form .announce-btn:hover{
 	cursor: pointer;
 	background: #dab902;
+}
+
+.signup-text{
+	text-align: center;
+	padding: 10px;
+	margin: 10px;
+}
+
+.signup-text a{
+	color: rgb(165, 225, 255);
 }

@@ -50,6 +50,14 @@
                     {%endfor%}
                 </ul>
             </div>
+            <div class="books-results">
+                <h3>NEWS</h3>
+                <ul>
+                    {%for i in engine.news_search()%}
+                    <li><a href="{{i.url}}" target="_blank">{{i.title}}</a></li>
+                    {%endfor%}
+                </ul>
+            </div>
             {%endif%}
         </div>
         {%else%}

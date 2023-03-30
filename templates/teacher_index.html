@@ -66,17 +66,22 @@
     </div>
     <div>{{form.announcement (class_ = "input")}}</div>
     <div>{{form.submit (class_ = "announce-btn")}}</div>
-  
-
-
+  </form>
+  <div class="chat-join">
+    <h3>Join Chat</h3>
+    <form action="" method="post">
+      <input type="text" name="code" id="code">
+      <label for="code">Enter code</label>
+      <button type="submit">Join</button>
+    </form>
+  </div>
 </div>
 </div>
 </section>
 
 <div class="navbar">
     <h3><a href="{{url_for('search_engine')}}">Geek Search</a></h3>
-    <h3><a href="#">Upload Marks</a></h3>
-    <h3><a href="#">Chat</a></h3>
+    <h3><a href="#">Events</a></h3>
     <h3><a href="{{url_for('upload_notes')}}">Upload Notes</a></h3>
 </div>
 {% endblock %}

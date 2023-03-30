@@ -11,11 +11,20 @@ class LoginForm(FlaskForm):
     member = RadioField(choices=['student', 'teacher', 'admin'], validators=[InputRequired()])
     submit = SubmitField("Login")
 
+class SignUpForm(FlaskForm):
+    Password = PasswordField(validators=[InputRequired(), Length(min=0, max=50)],render_kw={"placeholder": "Password"})
+    member = RadioField(choices=['student', 'teacher'], validators=[InputRequired()])
+
+    Name = StringField(validators=[InputRequired(), Length(min=0, max=50)],render_kw={"placeholder": "Name"})
+    Email = EmailField(validators=[InputRequired(), Length(min=0, max=50)],render_kw={"placeholder": "Email"})
+    Mobile = StringField(validators=[InputRequired(), Length(min=10, max=10)],render_kw={"placeholder": "Mobile Number"})
+    submit = SubmitField("SignUp")
+    
 
 class CreateMember(FlaskForm):
     Name = StringField(validators=[InputRequired(), Length(min=0, max=50)],render_kw={"placeholder": "Name"})
     SEM = StringField(validators=[InputRequired(), Length(min=0, max=2)],render_kw={"placeholder": "semester"})
-    Course = SelectField('Select an option',choices=[('Bcom(H)','Bcom(H)'),('BCA','BCA'),('BA.EPS','BA.EPS'),("BBA","BBA"),("BBA(H)","BBA(H)"),
+    Course = SelectField('Select an option',choices=[('cms','cms'),('BCA','BCA'),('BA.EPS','BA.EPS'),("BBA","BBA"),("BBA(H)","BBA(H)"),
                                   ("Bsc.CMS","Bsc.CMS"),("MBA","MBA"),("MCA","MCA"),('BPSYH','BPSYH')])
     Username = StringField(validators=[InputRequired(), Length(min=8, max=8)],render_kw={"placeholder": "RollNo/Username"})
     Email = EmailField(validators=[InputRequired(), Length(min=0, max=50)],render_kw={"placeholder": "Email"})
@@ -55,10 +64,24 @@ class PersonalDetails(FlaskForm):
     Local_Guardian = StringField(validators=[InputRequired()],render_kw={"placeholder": "Local Guardian"})
     submit = SubmitField("Submit")
 
+class TeacherPersonalDetails(FlaskForm):
+     City = StringField(validators=[InputRequired(), Length(min=0, max=20)],render_kw={"placeholder": "city"})
+     State = StringField(validators=[InputRequired(), Length(min=0, max=20)],render_kw={"placeholder": "State"})
+     Country = StringField(validators=[InputRequired(), Length(min=0, max=20)],render_kw={"placeholder": "country"})
+     qualification = StringField(validators=[InputRequired(), Length(min=0, max=20)],render_kw={"placeholder": "Qualification"})
+     submit = SubmitField("Submit")
+
+class Chat(FlaskForm):
+    name = StringField(validators=[InputRequired(), Length(min=0, max=6)],render_kw={"placeholder": "Code"})
+    submit = SubmitField("Join")
+
+class ChatMessage(FlaskForm):
+        text = StringField(validators=[InputRequired()],render_kw={"placeholder": "Enter text"})
+        submit = SubmitField("send")
+
 class add_class(FlaskForm):
     SEM = StringField(validators=[Length(min=0, max=2)],render_kw={"placeholder": "semester"})
-    Course = SelectField(choices=[('Bcom(H)','Bcom(H)'),('BCA','BCA'),('BA.EPS','BA.EPS'),("BBA","BBA"),("BBA(H)","BBA(H)"),
-                                  ("Bsc.CMS","Bsc.CMS"),("MBA","MBA"),("MCA","MCA"),('BPSYH','BPSYH')])
+    Course = SelectField(choices=[('cms','cms'),('bca','bca'),('ems','ems'),("bda","bda")])
     submit = SubmitField("Submit")
 
 class announcement(FlaskForm):

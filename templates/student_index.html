@@ -39,19 +39,27 @@
       <h2 class="hidden">Announcemetns</h2>
       <div class="content">
       {%for i in announcements%}
-      <p class="hidden">{{i[1].TEXT}} <br>{{i[1].TName }} ({{i[1].Date_time}})</p>
+      <p class="hidden">{{i}}</p>
       <br><br>
        {%endfor%}
      </div>
     </div>
+  </div>
+  <div class="chat-join">
+    <h3>Join Chat</h3>
+    <form action="" method="post">
+      {{chatform.csrf_token}}
+      {{chatform.name (class_ = "input")}}
+      {{chatform.submit}}
+      </form>
+    <p class="error"></p>
   </div>
 </div>
 </div>
 </section>
 <div class="navbar">
     <h3><a href="{{url_for('search_engine')}}">Geek Search</a></h3>
-    <h3><a href="#">View Marks</a></h3>
-    <h3><a href="#">Chat</a></h3>
+    <h3><a href="{{url_for('chat',type='create')}}">Events</a></h3>
     <h3><a href="{{url_for('view_notes')}}">Notes</a></h3>
 </div>
 {% endblock %}

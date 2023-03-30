@@ -15,12 +15,8 @@
 					{{form.Course (class_ = "input")}}
 					{%else%}
 					<h3 class="label">Update {{member.capitalize()}} </h3>
-                    {{form.Email (class_ = "input" ,value = email_value)}}
                     {{form.Mobile (class_ = "input" , value = mobile_value)}}
 					{{form.SEM (class_ = "input" , value = sem_value)}}
-					{% if member == 'Teacher' %}
-					{{form.Salary (class_ = 'input', value = salary_value)}}
-					{% endif %}
 					{%endif%}
 					{{form.submit (class_ = "btn")}}
 					{%if add_class%}

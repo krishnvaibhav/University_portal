@@ -22,6 +22,7 @@
 						{% endfor %}
 					</div>
 					{{form.submit (class_ = "btn")}}
+					<p class="signup-text">Have not signed up ? <a href="{{url_for('Signup_page')}}">signup here</a></p>
 				</form>
 				<p class="flashing-error hidden">{{error}}</p>
 			</div>
