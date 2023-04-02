@@ -19,7 +19,8 @@ import sys
 from profanity_check import predict
 import smtplib
 from flask_socketio import join_room,leave_room,send,SocketIO
-import functions
+import json
+from serpapi import GoogleSearch
 
 sender_email = "anonymousrobot974@gmail.com"
 
@@ -149,18 +150,18 @@ class Notes(db.Model,UserMixin):
     def get_id(self):
         return self.NID
 
-
-class Chat(db.Model,UserMixin):
-    chat_id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.String(100), nullable=False)
-    created = db.Column(db.String(200), nullable=False)
+    
+class Events(db.Model,UserMixin):
+    EID = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    venu = db.Column(db.String(200), nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    tname = db.Column(db.String(200), nullable=False)
+    
     
     def get_id(self):
         return self.chat_id
-    
-socketio = SocketIO(app)
-
-
 @app.route('/', methods=['GET', 'POST'])
 def login_page():
     form = forms.LoginForm()
@@ -333,8 +334,10 @@ def view_notes():
     # print(count_notes_class)
     all_notes = db.session.query(Student, Notes).filter_by(Class=student_class)\
         .join(Notes, Student.Class == Notes.Class).all()
-    first_notes = all_notes[:count_notes_class]
+    # first_notes = all_notes[:count_notes_class]
 
+    # print(all_notes[0][1].upload_date)
+    all_notes = [*set(announcement_list)]
     return render_template('download_notes.html',notes=first_notes)
 
 
@@ -576,7 +579,6 @@ def create_member():
         db.session.add(new_member)
         db.session.commit()
         return redirect(url_for('admin_login'))
-    # print('not validated')
     return render_template('make-member.html', form=form, member=member)
 
 
@@ -600,9 +602,81 @@ def member_details():
     session['to-update'] = session['member']
     return render_template('member_details.html', user=all_user_details, member=session['member'])
 
-@app.route("/Events/send")
+@app.route("/Events/send",methods=['GET','POST'])
+@login_required
 def upload_events():
-    return render_template
+    name = ""
+    if "user" in session and "user-name" in session:
+        if session['user'] == "teacher":
+            name = session['user-name']
+        else:
+            return redirect(url_for('login_page'))
+    else:
+        return redirect(url_for('login_page'))
+    form = forms.Events()
+    if form.validate_on_submit():
+        date = form.date.data
+        venu = form.venu.data
+        description = form.description.data
+        name = form.name.data
+        tname = session['user-name']
+
+        new = Events(name=name,date=date,venu=venu,description=description,tname=tname)
+
+        db.session.add(new)
+        db.session.commit()
+
+        return redirect(url_for('teacher_login'))
+
+    return render_template("upload_events.html",form=form)
+
+
+@app.route("/events/view")
+@login_required
+def event_view():
+    name = ""
+    if "user" in session and "user-name" in session:
+        if session['user'] == "student":
+            name = session['user-name']
+        else:
+            return redirect(url_for('login_page'))
+    else:
+        return redirect(url_for('login_page'))
+    all_events = Events.query.all()
+    for i in all_events:
+        if datetime.date.today() > i.date:
+            db.session.delete(i)
+            db.session.commit()
+    return render_template('view_events.html',all_events=all_events)
+
+@app.route("/Geek-Hunter",methods=['GET','POST'])
+@login_required
+def geek_hunter():
+    results_list = []
+    searchBar = forms.SearchEngine()
+    if searchBar.validate_on_submit():
+        search_term = searchBar.search.data
+        if search_term is not None:
+            if predict([search_term]) == [1]:
+                profane = True
+            else:
+                profane = False
+
+        params = {
+            "engine": "duckduckgo",
+            "q": f"{search_term} tutorial",
+            "sort_by": "rating",
+            "sort_order": "desc",
+            "num": 10,
+            "api_key": "50c1f2cb977b3a7e2f8cc9f4a11e7cdebdeb1bf6345078cd1875a59399509204",
+        }
+        search = GoogleSearch(params)
+        results = search.get_dict()
+        for result in results["organic_results"]:
+            results_list.append({"link":result['link'],"title":result["title"],"description":result['snippet']})
+
+    return render_template('geek-hunter.html',links=results_list,search=searchBar,member=session['user'],profane=profane)
+
 
 @app.route('/logout')
 @login_required
@@ -616,7 +690,7 @@ def logout():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    socketio.run(app=app,debug=True)
+    app.run(debug=True)
 
 
 

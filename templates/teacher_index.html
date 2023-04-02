@@ -4,6 +4,7 @@
 {% endblock%}
 {% block title %} Teacher {% endblock %}
 {% block header %}
+
 <body class="student-body">
 </body>
 {{super()}}
@@ -13,95 +14,88 @@
 <section class="student-main">
   <div class="overlay">
     <div class="student-split">
-  <div class="student-profile py-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="card shadow-sm">
-            <div class="card-header bg-transparent text-center">
-              <img class="profile_img" src="../static/images/person3.jpg" alt="">
-              <h3>{{user[0].Name}}</h3>
-            </div>
-            <div class="card-body">
-              <p class="mb-0"><strong class="pr-1">Username : </strong>{{user[0].Username}}</p>
-              {%if user[0].Class != "" %}
-              <p class="mb-0"><strong class="pr-1">Class - 1 : </strong>{{user[0].Class}}</p>
-              {%endif%}
-              {%if user[0].Class1 != "" %}
-              <p class="mb-0"><strong class="pr-1">Class - 2 : </strong>{{user[0].Class1}}</p>
-              {% endif %}
-              {%if user[0].Class2 != "" %}
-              <p class="mb-0"><strong class="pr-1">Class - 3: </strong>{{user[0].Class2}}</p>
-              {% endif %}
-              {%if user[0].Class3 != "" %}
-              <p class="mb-0"><strong class="pr-1">Class - 4: </strong>{{user[0].Class3}}</p>
-              {% endif %}
-              <p class="mb-0"><strong class="pr-1">Email : </strong>{{user[0].Email}}</p>
-              <p class="mb-0"><strong class="pr-1">Mobile : </strong>{{user[0].Mobile}}</p>
+      <div class="student-profile py-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card shadow-sm">
+                <div class="card-header bg-transparent text-center">
+                  <img class="profile_img" src="../static/images/person3.jpg" alt="">
+                  <h3>{{user[0].Name}}</h3>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0"><strong class="pr-1">Username : </strong>{{user[0].Username}}</p>
+                  {%if user[0].Class != "" %}
+                  <p class="mb-0"><strong class="pr-1">Class - 1 : </strong>{{user[0].Class}}</p>
+                  {%endif%}
+                  {%if user[0].Class1 != "" %}
+                  <p class="mb-0"><strong class="pr-1">Class - 2 : </strong>{{user[0].Class1}}</p>
+                  {% endif %}
+                  {%if user[0].Class2 != "" %}
+                  <p class="mb-0"><strong class="pr-1">Class - 3: </strong>{{user[0].Class2}}</p>
+                  {% endif %}
+                  {%if user[0].Class3 != "" %}
+                  <p class="mb-0"><strong class="pr-1">Class - 4: </strong>{{user[0].Class3}}</p>
+                  {% endif %}
+                  <p class="mb-0"><strong class="pr-1">Email : </strong>{{user[0].Email}}</p>
+                  <p class="mb-0"><strong class="pr-1">Mobile : </strong>{{user[0].Mobile}}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <form class="announcement-post" method="post">
+        {{ form.csrf_token }}
+        <h3>Announcement</h3>
+        <div class="select-class">
+          <label for="classes">Choose a class : </label>
+          <select name="classes" id="classes">
+            {%if user[0].Class != "" %}
+            <option value="{{user[0].Class}}">{{user[0].Class}}</option>
+            {%endif%}
+            {%if user[0].Class1 != "" %}
+            <option value="{{user[0].Class1}}">{{user[0].Class1}}</option>
+            {%endif%}
+            {%if user[0].Class2 != "" %}
+            <option value="{{user[0].Class2}}">{{user[0].Class2}}</option>
+            {%endif%}
+            {%if user[0].Class3 != "" %}
+            <option value="{{user[0].Class3}}">{{user[0].Class3}}</option>
+            {%endif%}
+          </select>
+        </div>
+        <div>{{form.announcement (class_ = "input")}}</div>
+        <div>{{form.submit (class_ = "announce-btn")}}</div>
+      </form>
+
     </div>
   </div>
-  <form class="announcement-post" method="post">
-    {{ form.csrf_token }}
-    <h3>Announcement</h3>
-    <div class="select-class">
-      <label for="classes">Choose a class : </label>
-      <select name="classes" id="classes">
-        {%if user[0].Class != "" %}
-        <option value="{{user[0].Class}}">{{user[0].Class}}</option>
-        {%endif%}
-        {%if user[0].Class1 != "" %}
-        <option value="{{user[0].Class1}}">{{user[0].Class1}}</option>
-        {%endif%}
-        {%if user[0].Class2 != "" %}
-        <option value="{{user[0].Class2}}">{{user[0].Class2}}</option>
-        {%endif%}
-        {%if user[0].Class3 != "" %}
-        <option value="{{user[0].Class3}}">{{user[0].Class3}}</option>
-        {%endif%}
-      </select>
-    </div>
-    <div>{{form.announcement (class_ = "input")}}</div>
-    <div>{{form.submit (class_ = "announce-btn")}}</div>
-  </form>
-  <div class="chat-join">
-    <h3>Join Chat</h3>
-    <form action="" method="post">
-      <input type="text" name="code" id="code">
-      <label for="code">Enter code</label>
-      <button type="submit">Join</button>
-    </form>
-  </div>
-</div>
-</div>
 </section>
 
 <div class="navbar">
-    <h3><a href="{{url_for('search_engine')}}">Geek Search</a></h3>
-    <h3><a href="#">Events</a></h3>
-    <h3><a href="{{url_for('upload_notes')}}">Upload Notes</a></h3>
+  <h3><a href="{{url_for('search_engine')}}">Geek Search</a></h3>
+  <h3><a href="{{url_for('upload_events')}}">Events</a></h3>
+  <h3><a href="{{url_for('geek_hunter')}}">Geek Hunter</a></h3>
 </div>
 {% endblock %}
 {% block JS%}
 <script>
   window.addEventListener('scroll', reveal);
 
-  function reveal(){
+  function reveal() {
     var reveals = document.querySelectorAll('.hidden');
-  
-    for(var i = 0; i < reveals.length; i++){
-  
+
+    for (var i = 0; i < reveals.length; i++) {
+
       var windowheight = window.innerHeight;
       var revealtop = reveals[i].getBoundingClientRect().top;
       var revealpoint = 150;
-  
-      if(revealtop < windowheight - revealpoint){
+
+      if (revealtop < windowheight - revealpoint) {
         reveals[i].classList.add('active');
       }
-      else{
+      else {
         reveals[i].classList.remove('active');
       }
     }

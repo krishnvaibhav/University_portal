@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Search Engine</title>
+</head>
+
+<body class="search-body">
+    <div class="loading">
+    </div>
+    <h1>Geek Hunter</h1>
+    <div class="searchengine">
+        <div class="searchbar">
+            <form action="#" method="post">
+                {{search.csrf_token}}
+                {{search.search(class_ = "search")}}
+                {{search.submit(class_ = 'icon')}}
+            </form>
+        </div>
+    </div>
+    <div class="search-result hunter">
+        {%if not profane%}
+        {%for i in links%}
+        <div class="hunter-container">
+            <h4><a href="{{i['link']}}" target="_blank">{{i['title']}}</a></h4>
+            <p>{{i['description']}}</p>
+        </div>
+        {%endfor%}
+        {%else%}
+        <h1>No Profane Searches are allowed</h1>
+        {%endif%}
+    </div>
+    </div>
+    <div class="btns">
+        {%if member == 'teacher'%}
+        <a href="{{url_for('teacher_login')}}" class="btn med-btn">Back</a>
+        {% elif member == 'student'%}
+        <a href="{{url_for('student_login')}}" class="btn med-btn">Back</a>
+        {%endif%}
+    </div>
+</body>
+<script>
+</script>
+
+</html>

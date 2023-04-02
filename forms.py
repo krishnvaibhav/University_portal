@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from markupsafe import Markup
-from wtforms import SubmitField, RadioField, PasswordField, StringField,EmailField ,SelectField , IntegerField,TextAreaField,FileField
+from wtforms import SubmitField, RadioField, PasswordField, StringField,EmailField ,SelectField , IntegerField,TextAreaField,FileField,DateField 
 from wtforms import validators, ValidationError
 from wtforms.validators import InputRequired, Length
 
@@ -42,7 +42,7 @@ class SearchAdminTeacher(FlaskForm):
     submit = SubmitField("->")
 
 class SearchEngine(FlaskForm):
-    search = StringField(validators=[InputRequired()],render_kw={"placeholder": "search"})
+    search = StringField(validators=[InputRequired()],render_kw={"placeholder": "search",'autocomplete': 'off'})
     submit = SubmitField("->")
 
 class UpdateMember(FlaskForm):
@@ -51,7 +51,6 @@ class UpdateMember(FlaskForm):
     Mobile = StringField(validators=[InputRequired(), Length(min=10, max=10)],render_kw={"placeholder": "Mobile Number"})
     Salary = StringField(validators=[Length(min=0, max=10)],render_kw={"placeholder": "Salary"})
     submit = SubmitField("update")
-
 
 class PersonalDetails(FlaskForm):
     Marks_10 = IntegerField(validators=[InputRequired()],render_kw={"placeholder": "10th Marks"})
@@ -92,3 +91,10 @@ class notes(FlaskForm):
     description = TextAreaField(validators=[InputRequired()])
     file=FileField()
     submit = SubmitField('Upload')
+
+class Events(FlaskForm):
+    name = StringField(validators=[InputRequired()],render_kw={"placeholder": "Enter Event Name"})
+    venu = StringField(validators=[InputRequired()],render_kw={"placeholder": "Enter Event venu"})
+    date = DateField("Event Date")
+    description = StringField(validators=[InputRequired()],render_kw={"placeholder": "Description"})
+    submit = SubmitField("Post")

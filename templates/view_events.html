@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="event_h1">Events</h1>
+    <div class="event_card_holder">
+        {%for i in all_events%}
+    <div class="event_card">
+        <div class="event_name">
+            {{i.name}}
+        </div>
+        <div class="event_description">
+            {{i.description}}
+        </div>
+        <div class="event_date_venu">
+            <div class="event_date">{{i.date}}</div>
+            <div class="event_venu">venue : {{i.venu}}</div>
+            <div class="event_teacher">posted : {{i.tname}}</div>
+        </div>
+    </div>
+    {%endfor%}
+    </div>
+    <div class="btns">
+        <a href="{{url_for('student_login')}}" class="event-btn">Go Back</a>
+
+    </div>
+</body>
+</html>
